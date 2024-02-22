@@ -26,8 +26,6 @@ router.post('/', func.verifyToken, async(req, res) => {
     });
     const subquery = 'INSERT INTO Subtask (task_id) VALUES (?)';
     const subvalues = [myUUID];
-    
-
     connection.query(subquery, subvalues, (queryError, results) => {
       if (queryError) {
         console.error('Error executing query:', queryError);
@@ -41,6 +39,31 @@ router.post('/', func.verifyToken, async(req, res) => {
   }
 });
 
+
+//Getting all task of user
+router.get('/tasks/:sort', func.verifyToken, (req,res)=>{
+try{
+  const sort=req.params.sort;
+  let query;
+  if(sort==='1'){
+   query = 'select * from Task order by priority asc';
+  }else{
+    query = 'select * from Task order by due_date acs';
+  }
+  connection.query(query,(queryError, results)=>{
+    if(queryError){
+      console.log("Error related to SQL query!!")
+      return res.status(500).json({ status: "error", message: "Internal Server Error" });
+    }
+    return res.json({ status: "successfully fechted tasks", result: results });
+
+  })
+}
+catch{
+  console.log(err);
+    return res.status(500).json({ status: "error", message: "Internal Server Error" });
+}
+})
 // Inserting New user into Database
 router.post('/user', (req, res) => {
   try {
