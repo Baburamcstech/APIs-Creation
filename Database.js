@@ -1,8 +1,10 @@
 var mysql=require('mysql')
+require('dotenv').config();
+
 const connection=mysql.createConnection({
     host:'localhost',
-    database:'OpeninApp',
-    user:'root',
-    password:'Babus@2005'
+    user:process.env.user,
+    password:process.env.password,
+    database:process.env.database
 })
 module.exports=connection;

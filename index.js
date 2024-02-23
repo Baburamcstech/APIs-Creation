@@ -15,10 +15,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookiesparser());
 
-cron.schedule('*/20 * * * * *', () => {
-    console.log('Running task priority update and deletion...');
-    updateTaskPrioritiesAndDelete();
-});
+// cron.schedule('*/20 * * * * *', () => {
+//     console.log('Running task priority update and deletion...');
+//     updateTaskPrioritiesAndDelete();
+// });
 // Mount the taskInsert route as middleware
 app.use('/taskInsert', Insert);
 app.use('/update', Update);
