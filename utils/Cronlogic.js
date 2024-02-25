@@ -38,7 +38,7 @@ function updateTaskPrioritiesAndDelete() {
             console.log(priority)
             // If priority is 0, delete the task
             if (priority === 0) {
-                const deleteQuery = `DELETE FROM tasks WHERE id = ${task.task_id}`;
+                const deleteQuery = `DELETE FROM tasks WHERE id = '${task.task_id}'`;
                 connection.query(deleteQuery, (deleteError, deleteResults) => {
                     if (deleteError) {
                         console.error(`Error deleting task ${task.id}:`, deleteError);
@@ -47,7 +47,7 @@ function updateTaskPrioritiesAndDelete() {
                     }
                 });
             }else{
-                const UpdateQuery = `UPDATE Task SET priority = ${priority} WHERE task_id = ${task.task_id}`;
+                const UpdateQuery = `UPDATE Task SET priority = ${priority} WHERE task_id = '${task.task_id}'`;
                 connection.query(UpdateQuery, (updateError, updateResults) => {
                     if (updateError) {
                         console.error(`Error updating task ${task.task_id}:`, updateError);
@@ -92,7 +92,7 @@ function updateUserPrioritiesAndDelete() {
             console.log(`Task ${user} Difference in days: ${diffInDays}, Priority: ${priority}`);
 
                 console.log(priority)
-                const UpdateQuery = `UPDATE user set priority= ${priority} WHERE id = ${user} `;
+                const UpdateQuery = `UPDATE user set priority= ${priority} WHERE id = '${user}' `;
                 connection.query(UpdateQuery, (updateError, updateResults) => {
                     if (updateError) {
                         console.error(`Error deleting task ${task.id}:`, updateError);
